@@ -310,9 +310,14 @@ export class BenchmarkRunner {
     }
 
     async _runMultipleIterations() {
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
         const iterationStartLabel = "iteration-start";
         const iterationEndLabel = "iteration-end";
         for (let i = 0; i < this._iterationCount; i++) {
+            await sleep(2000);
             performance.mark(iterationStartLabel);
             await this.runAllSuites();
             performance.mark(iterationEndLabel);
